@@ -41,6 +41,7 @@ public class UserDao {
 		String sql = "SELECT * FROM user WHERE username='" + username + "'";
 		ResultSet rs = DaoUtils.query(sql);
 		User user = null;
+
 		try {
 			if (rs.next()) {
 				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3),
@@ -49,13 +50,16 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+
 			try {
 				rs.close();
 				DaoUtils.closeConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+
 		}
+
 		return user;
 	}
 
@@ -70,6 +74,38 @@ public class UserDao {
 				+ "', '" + user.getPassword() + "', '" + user.getEmail()
 				+ "', '" + user.getPhone() + "')";
 		DaoUtils.update(sql);
+	}
+
+	/**
+	 * 根据用户名查找user表，判断用户是否存在
+	 * 
+	 * @param username
+	 *            用户名
+	 * @return true代表存在，false代表不存在
+	 */
+	public boolean exists(String username) {
+		String sql = "SELECT username FROM user WHERE username='" + username
+				+ "'";
+		ResultSet rs = DaoUtils.query(sql);
+
+		try {
+			if (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			try {
+				rs.close();
+				DaoUtils.closeConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		return false;
 	}
 
 }

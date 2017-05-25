@@ -13,6 +13,11 @@
     <servlet-name>RegistServlet</servlet-name>
     <servlet-class>cn.edu.njupt.sourceproductsserver.web.servlet.RegistServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ProductServlet</servlet-name>
+    <servlet-class>cn.edu.njupt.sourceproductsserver.web.servlet.ProductServlet</servlet-class>
+  </servlet>
+
 
 
   <servlet-mapping>
@@ -22,6 +27,10 @@
   <servlet-mapping>
     <servlet-name>RegistServlet</servlet-name>
     <url-pattern>/RegistServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ProductServlet</servlet-name>
+    <url-pattern>/ProductServlet</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

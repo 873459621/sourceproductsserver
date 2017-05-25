@@ -1,5 +1,6 @@
 package cn.edu.njupt.sourceproductsserver.web.servlet;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.edu.njupt.sourceproductsserver.dao.UserDao;
 import cn.edu.njupt.sourceproductsserver.domain.User;
+import cn.edu.njupt.sourceproductsserver.utils.ResponseUtils;
 
 /**
  * 控制用户登录逻辑的Servlet
@@ -32,15 +34,16 @@ public class LoginServlet extends HttpServlet {
 
 		UserDao userDao = UserDao.getInstance();
 		User user = userDao.getUser(username);
-
+		
 		if (user == null) {
-			response.getOutputStream().write("user".getBytes("utf-8"));
+			ResponseUtils.write(response, "user");
+
 		} else {
 			if (password.equals(user.getPassword())) {
-				response.getOutputStream().write(
-						user.toString().getBytes("utf-8"));
+				ResponseUtils.write(response, user.toString());
+
 			} else {
-				response.getOutputStream().write("pwd".getBytes("utf-8"));
+				ResponseUtils.write(response, "pwd");
 			}
 		}
 	}
