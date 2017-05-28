@@ -31,8 +31,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "{uid:" + uid + ", username:" + username + ", password:"
-				+ password + ", email:" + email + ", phone:" + phone + "}";
+		return "{\"uid\":\"" + uid + "\", \"username\":\"" + username
+				+ "\", \"password\":\"" + password + "\", \"email\":\"" + email
+				+ "\", \"phone\":\"" + phone + "\"}";
 	}
 
 	public int getUid() {

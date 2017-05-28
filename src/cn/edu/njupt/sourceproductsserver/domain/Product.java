@@ -30,8 +30,9 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "{pid:" + pid + ", pname:" + pname + ", price:" + price
-				+ ", image:" + image + ", des:" + des + ", cid:" + cid + "}";
+		return "{\"pid\":\"" + pid + "\", \"pname\":\"" + pname
+				+ "\", \"price\":\"" + price + "\", \"image\":\"" + image
+				+ "\", \"des\":\"" + des + "\", \"cid\":\"" + cid + "\"}";
 	}
 
 	/**
@@ -40,8 +41,9 @@ public class Product {
 	 * @return 产品对象的JSON字符串
 	 */
 	public String toJSON() {
-		return "{pid:" + pid + ", pname:" + pname + ", price:" + price
-				+ ", image:" + image + "}";
+		return "{\"pid\":\"" + pid + "\", \"pname\":\"" + pname
+				+ "\", \"price\":\"" + price + "\", \"image\":\"" + image
+				+ "\", \"des\":\"" + des + "\"}";
 	}
 
 	public int getPid() {

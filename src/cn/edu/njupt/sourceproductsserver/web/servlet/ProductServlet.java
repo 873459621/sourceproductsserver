@@ -37,7 +37,7 @@ public class ProductServlet extends HttpServlet {
 			ResponseUtils.write(response, JSONUtils.toJSON(productList));
 
 		} else if ("total".equals(method)) {
-
+			ResponseUtils.write(response, productDao.getTotal() + "");
 		}
 	}
 

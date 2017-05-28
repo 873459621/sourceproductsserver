@@ -69,4 +69,32 @@ public class ProductDao {
 		return productList;
 	}
 
+	/**
+	 * 获取产品总数
+	 * 
+	 * @return 产品总数
+	 */
+	public int getTotal() {
+		String sql = "SELECT COUNT(*) FROM product";
+		ResultSet rs = DaoUtils.query(sql);
+
+		try {
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			try {
+				rs.close();
+				DaoUtils.closeConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return 0;
+	}
+
 }

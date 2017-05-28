@@ -21,7 +21,7 @@ public class JSONUtils {
 	public static String toJSON(List<Product> productList) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("{productList:[");
+		sb.append("{\"productList\":[");
 		sb.append(productList.get(0).toJSON());
 
 		for (int i = 1; i < productList.size(); i++) {

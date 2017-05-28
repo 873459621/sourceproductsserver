@@ -1,6 +1,5 @@
 package cn.edu.njupt.sourceproductsserver.web.servlet;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
