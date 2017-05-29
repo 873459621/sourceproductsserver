@@ -16,16 +16,12 @@ public class Product {
 
 	public Product(int pid, String pname, double price, String image,
 			String des, int cid) {
-		this(pid, pname, price, image);
-		this.des = des;
-		this.cid = cid;
-	}
-
-	public Product(int pid, String pname, double price, String image) {
 		this.pid = pid;
 		this.pname = pname;
 		this.price = price;
 		this.image = image;
+		this.des = des;
+		this.cid = cid;
 	}
 
 	@Override
@@ -33,17 +29,6 @@ public class Product {
 		return "{\"pid\":\"" + pid + "\", \"pname\":\"" + pname
 				+ "\", \"price\":\"" + price + "\", \"image\":\"" + image
 				+ "\", \"des\":\"" + des + "\", \"cid\":\"" + cid + "\"}";
-	}
-
-	/**
-	 * 封装产品对象为JSON字符串
-	 * 
-	 * @return 产品对象的JSON字符串
-	 */
-	public String toJSON() {
-		return "{\"pid\":\"" + pid + "\", \"pname\":\"" + pname
-				+ "\", \"price\":\"" + price + "\", \"image\":\"" + image
-				+ "\", \"des\":\"" + des + "\"}";
 	}
 
 	public int getPid() {

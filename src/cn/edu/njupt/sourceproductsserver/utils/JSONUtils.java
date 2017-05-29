@@ -2,8 +2,6 @@ package cn.edu.njupt.sourceproductsserver.utils;
 
 import java.util.List;
 
-import cn.edu.njupt.sourceproductsserver.domain.Product;
-
 /**
  * 提供JSON字符串转换的工具类
  * 
@@ -12,21 +10,23 @@ import cn.edu.njupt.sourceproductsserver.domain.Product;
 public class JSONUtils {
 
 	/**
-	 * 把产品数据列表转换为JSON字符串
+	 * 把列表转换为JSON字符串
 	 * 
-	 * @param productList
-	 *            产品数据列表
+	 * @param list
+	 *            列表
+	 * @param name
+	 *            列表名称
 	 * @return JSON字符串
 	 */
-	public static String toJSON(List<Product> productList) {
+	public static String toJSON(List<?> list, String name) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("{\"productList\":[");
-		sb.append(productList.get(0).toJSON());
+		sb.append("{\"" + name + "\":[");
+		sb.append(list.get(0).toString());
 
-		for (int i = 1; i < productList.size(); i++) {
+		for (int i = 1; i < list.size(); i++) {
 			sb.append(", ");
-			sb.append(productList.get(i).toJSON());
+			sb.append(list.get(i).toString());
 		}
 
 		sb.append("]}");

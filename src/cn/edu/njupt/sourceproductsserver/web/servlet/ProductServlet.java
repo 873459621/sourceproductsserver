@@ -34,7 +34,8 @@ public class ProductServlet extends HttpServlet {
 		if ("productList".equals(method)) {
 			String index = request.getParameter("index");
 			List<Product> productList = productDao.getProductList(index);
-			ResponseUtils.write(response, JSONUtils.toJSON(productList));
+			ResponseUtils.write(response,
+					JSONUtils.toJSON(productList, "productList"));
 
 		} else if ("total".equals(method)) {
 			ResponseUtils.write(response, productDao.getTotal() + "");
