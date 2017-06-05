@@ -24,13 +24,6 @@ public class Product {
 		this.cid = cid;
 	}
 
-	@Override
-	public String toString() {
-		return "{\"pid\":\"" + pid + "\", \"pname\":\"" + pname
-				+ "\", \"price\":\"" + price + "\", \"image\":\"" + image
-				+ "\", \"des\":\"" + des + "\", \"cid\":\"" + cid + "\"}";
-	}
-
 	public int getPid() {
 		return pid;
 	}

@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import cn.edu.njupt.sourceproductsserver.dao.LocationDao;
 import cn.edu.njupt.sourceproductsserver.domain.Location;
-import cn.edu.njupt.sourceproductsserver.utils.JSONUtils;
 import cn.edu.njupt.sourceproductsserver.utils.ResponseUtils;
 
 /**
@@ -30,8 +30,8 @@ public class LocationServlet extends HttpServlet {
 		int pid = Integer.parseInt(request.getParameter("pid"));
 		LocationDao locationDao = LocationDao.getInstance();
 		List<Location> locationList = locationDao.getLocationList(pid);
-		ResponseUtils.write(response,
-				JSONUtils.toJSON(locationList, "locationList"));
+		ResponseUtils.write(response, JSONArray.fromObject(locationList)
+				.toString());
 	}
 
 }

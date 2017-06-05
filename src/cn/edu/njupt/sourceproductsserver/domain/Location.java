@@ -15,12 +15,6 @@ public class Location {
 		this.location = location;
 	}
 
-	@Override
-	public String toString() {
-		return "{\"ltime\":\"" + ltime + "\", \"location\":\"" + location
-				+ "\"}";
-	}
-
 	public String getLtime() {
 		return ltime;
 	}

@@ -35,10 +35,8 @@ public class LocationDao {
 	public List<Location> getLocationList(int pid) {
 		List<Location> locationList = new ArrayList<Location>();
 		Location location;
-
 		String sql = "SELECT * FROM location WHERE pid=" + pid;
 		ResultSet rs = DaoUtils.query(sql);
-
 		try {
 			while (rs.next()) {
 				String ltime = rs.getString(3);
@@ -49,16 +47,8 @@ public class LocationDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-
-			try {
-				rs.close();
-				DaoUtils.closeConnection();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
+			DaoUtils.closeConnection(rs);
 		}
-
 		return locationList;
 	}
 }

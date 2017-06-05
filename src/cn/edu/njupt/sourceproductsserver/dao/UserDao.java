@@ -7,7 +7,7 @@ import cn.edu.njupt.sourceproductsserver.domain.User;
 import cn.edu.njupt.sourceproductsserver.utils.DaoUtils;
 
 /**
- * 提供对用户表操作的Dao
+ * 提供对用户表操作的Dao，单例设计模式
  * 
  * @author hhw
  */
@@ -41,7 +41,6 @@ public class UserDao {
 		String sql = "SELECT * FROM user WHERE username='" + username + "'";
 		ResultSet rs = DaoUtils.query(sql);
 		User user = null;
-
 		try {
 			if (rs.next()) {
 				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3),
@@ -50,16 +49,8 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-
-			try {
-				rs.close();
-				DaoUtils.closeConnection();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
+			DaoUtils.closeConnection(rs);
 		}
-
 		return user;
 	}
 
@@ -84,10 +75,8 @@ public class UserDao {
 	 * @return true代表存在，false代表不存在
 	 */
 	public boolean exists(String username) {
-		String sql = "SELECT username FROM user WHERE username='" + username
-				+ "'";
+		String sql = "SELECT * FROM user WHERE username='" + username + "'";
 		ResultSet rs = DaoUtils.query(sql);
-
 		try {
 			if (rs.next()) {
 				return true;
@@ -95,16 +84,8 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-
-			try {
-				rs.close();
-				DaoUtils.closeConnection();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
+			DaoUtils.closeConnection(rs);
 		}
-
 		return false;
 	}
 

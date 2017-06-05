@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import cn.edu.njupt.sourceproductsserver.dao.CategoryDao;
 import cn.edu.njupt.sourceproductsserver.domain.Category;
-import cn.edu.njupt.sourceproductsserver.utils.JSONUtils;
 import cn.edu.njupt.sourceproductsserver.utils.ResponseUtils;
 
 /**
@@ -29,8 +29,8 @@ public class CategoryServlet extends HttpServlet {
 			throws ServletException, IOException {
 		CategoryDao categoryDao = CategoryDao.getInstance();
 		List<Category> categoryList = categoryDao.getCategoryList();
-		ResponseUtils.write(response,
-				JSONUtils.toJSON(categoryList, "categoryList"));
+		ResponseUtils.write(response, JSONArray.fromObject(categoryList)
+				.toString());
 	}
 
 }

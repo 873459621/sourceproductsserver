@@ -25,6 +25,11 @@
     <servlet-name>LocationServlet</servlet-name>
     <servlet-class>cn.edu.njupt.sourceproductsserver.web.servlet.LocationServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>OrderServlet</servlet-name>
+    <servlet-class>cn.edu.njupt.sourceproductsserver.web.servlet.OrderServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -49,6 +54,10 @@
   <servlet-mapping>
     <servlet-name>LocationServlet</servlet-name>
     <url-pattern>/LocationServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/OrderServlet</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

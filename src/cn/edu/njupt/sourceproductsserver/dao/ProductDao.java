@@ -9,7 +9,7 @@ import cn.edu.njupt.sourceproductsserver.domain.Product;
 import cn.edu.njupt.sourceproductsserver.utils.DaoUtils;
 
 /**
- * 提供对产品表操作的Dao
+ * 提供对产品表操作的Dao，单例设计模式
  * 
  * @author hhw
  */
@@ -40,12 +40,37 @@ public class ProductDao {
 	 * @return 20个产品的List集合
 	 */
 	public List<Product> getProductList(String index) {
+		String sql = "SELECT * FROM product LIMIT " + index + ", 20";
+		return getList(sql);
+
+	}
+
+	/**
+	 * 根据指定位置索引值和产品分类ID，获取20个产品的数据
+	 * 
+	 * @param index
+	 *            位置索引值
+	 * @param cid
+	 *            产品分类ID
+	 * @return 20个产品的List集合
+	 */
+	public List<Product> getProductList(String index, String cid) {
+		String sql = "SELECT * FROM product WHERE cid=" + cid + " LIMIT "
+				+ index + ", 20";
+		return getList(sql);
+	}
+
+	/**
+	 * 根据sql语句，获取产品的数据集
+	 * 
+	 * @param sql
+	 *            sql语句
+	 * @return 产品的数据集
+	 */
+	private List<Product> getList(String sql) {
 		List<Product> productList = new ArrayList<Product>();
 		Product product;
-
-		String sql = "SELECT * FROM product LIMIT " + index + ", 20";
 		ResultSet rs = DaoUtils.query(sql);
-
 		try {
 			while (rs.next()) {
 				product = new Product(rs.getInt(1), rs.getString(2),
@@ -56,16 +81,8 @@ public class ProductDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-
-			try {
-				rs.close();
-				DaoUtils.closeConnection();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
+			DaoUtils.closeConnection(rs);
 		}
-
 		return productList;
 	}
 
@@ -76,8 +93,30 @@ public class ProductDao {
 	 */
 	public int getTotal() {
 		String sql = "SELECT COUNT(*) FROM product";
-		ResultSet rs = DaoUtils.query(sql);
+		return getCount(sql);
+	}
 
+	/**
+	 * 根据产品分类ID，获取分类产品的总个数
+	 * 
+	 * @param cid
+	 *            产品分类ID
+	 * @return 分类产品的总个数
+	 */
+	public int getTotal(String cid) {
+		String sql = "SELECT COUNT(*) FROM product WHERE cid=" + cid;
+		return getCount(sql);
+	}
+
+	/**
+	 * 根据sql语句，获取产品总数
+	 * 
+	 * @param sql
+	 *            sql语句
+	 * @return 产品总数
+	 */
+	private int getCount(String sql) {
+		ResultSet rs = DaoUtils.query(sql);
 		try {
 			if (rs.next()) {
 				return rs.getInt(1);
@@ -85,14 +124,7 @@ public class ProductDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-
-			try {
-				rs.close();
-				DaoUtils.closeConnection();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
+			DaoUtils.closeConnection(rs);
 		}
 		return 0;
 	}

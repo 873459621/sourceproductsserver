@@ -15,11 +15,6 @@ public class Category {
 		this.cname = cname;
 	}
 
-	@Override
-	public String toString() {
-		return "{\"cid\":\"" + cid + "\", \"cname\":\"" + cname + "\"}";
-	}
-
 	public int getCid() {
 		return cid;
 	}

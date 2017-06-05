@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import cn.edu.njupt.sourceproductsserver.dao.ProductDao;
 import cn.edu.njupt.sourceproductsserver.domain.Product;
-import cn.edu.njupt.sourceproductsserver.utils.JSONUtils;
 import cn.edu.njupt.sourceproductsserver.utils.ResponseUtils;
 
 /**
@@ -30,16 +30,25 @@ public class ProductServlet extends HttpServlet {
 		String method = request.getParameter("method");
 
 		ProductDao productDao = ProductDao.getInstance();
+		String cid = request.getParameter("cid");
 
 		if ("productList".equals(method)) {
 			String index = request.getParameter("index");
-			List<Product> productList = productDao.getProductList(index);
-			ResponseUtils.write(response,
-					JSONUtils.toJSON(productList, "productList"));
+			List<Product> productList;
+			if (cid == null) {
+				productList = productDao.getProductList(index);
+			} else {
+				productList = productDao.getProductList(index, cid);
+			}
+			ResponseUtils.write(response, JSONArray.fromObject(productList)
+					.toString());
 
 		} else if ("total".equals(method)) {
-			ResponseUtils.write(response, productDao.getTotal() + "");
+			if (cid == null) {
+				ResponseUtils.write(response, productDao.getTotal() + "");
+			} else {
+				ResponseUtils.write(response, productDao.getTotal(cid) + "");
+			}
 		}
 	}
-
 }

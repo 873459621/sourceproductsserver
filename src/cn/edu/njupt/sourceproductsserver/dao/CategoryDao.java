@@ -40,10 +40,8 @@ public class CategoryDao {
 	public List<Category> getCategoryList() {
 		List<Category> categoryList = new ArrayList<Category>();
 		Category category;
-
 		String sql = "SELECT * FROM category";
 		ResultSet rs = DaoUtils.query(sql);
-
 		try {
 			while (rs.next()) {
 				category = new Category(rs.getInt(1), rs.getString(2));
@@ -52,16 +50,8 @@ public class CategoryDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-
-			try {
-				rs.close();
-				DaoUtils.closeConnection();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
+			DaoUtils.closeConnection(rs);
 		}
-
 		return categoryList;
 	}
 

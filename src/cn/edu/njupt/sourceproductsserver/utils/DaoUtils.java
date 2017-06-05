@@ -48,6 +48,23 @@ public class DaoUtils {
 	}
 
 	/**
+	 * 关闭与数据库的连接
+	 * 
+	 * @param rs
+	 *            结果集
+	 */
+	public static void closeConnection(ResultSet rs) {
+		try {
+			if (rs != null) {
+				rs.close();
+			}
+			closeConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * 执行数据库的更新操作
 	 * 
 	 * @param sql

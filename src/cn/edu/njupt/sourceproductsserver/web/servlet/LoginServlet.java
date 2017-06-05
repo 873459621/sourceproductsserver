@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
 import cn.edu.njupt.sourceproductsserver.dao.UserDao;
 import cn.edu.njupt.sourceproductsserver.domain.User;
 import cn.edu.njupt.sourceproductsserver.utils.ResponseUtils;
@@ -33,13 +34,14 @@ public class LoginServlet extends HttpServlet {
 
 		UserDao userDao = UserDao.getInstance();
 		User user = userDao.getUser(username);
-		
+
 		if (user == null) {
 			ResponseUtils.write(response, "user");
 
 		} else {
 			if (password.equals(user.getPassword())) {
-				ResponseUtils.write(response, user.toString());
+				ResponseUtils.write(response, JSONObject.fromObject(user)
+						.toString());
 
 			} else {
 				ResponseUtils.write(response, "pwd");
